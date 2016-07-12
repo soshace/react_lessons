@@ -1,5 +1,5 @@
 import React, { Component }  from 'react'
-import Article from './Article'
+import Article from './Article/index'
 import oneOpen from '../decorators/oneOpen'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
