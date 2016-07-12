@@ -5,7 +5,7 @@ export default {
             isOpen: false
         }
     },
-    toggleOpen: () => {
+    toggleOpen() {
         this.setState({
             isOpen: !this.state.isOpen
         })
