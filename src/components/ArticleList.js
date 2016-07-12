@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import Article from './Article'
-import oneOpen from './decorators/oneOpen'
+import oneOpen from '../decorators/oneOpen'
 
 class ArticleList extends Component {
     render() {

@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'
 import Article from './Article'
-import oneOpen from './mixins/oneOpen'
+import oneOpen from '../mixins/oneOpen'
 
 const ArticleList = React.createClass({
     mixins: [oneOpen],

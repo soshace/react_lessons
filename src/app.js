@@ -1,5 +1,5 @@
 import { articles } from './fixtures'
-import ArticleList from './ArticleListOld'
+import ArticleList from './components/ArticleList'
 import React from 'react'
 import { render } from 'react-dom'
 

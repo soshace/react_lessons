@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
-import toggleOpen from './decorators/toggleOpen'
+import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
 
