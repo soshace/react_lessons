@@ -59,7 +59,6 @@ class ArticleList extends Component {
     }
 
     handleDayClick = (e, day) => {
-        console.log('---', day)
         const range = DateUtils.addDayToRange(day, this.state);
         this.setState(range)
     }
