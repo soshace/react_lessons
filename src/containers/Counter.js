@@ -24,7 +24,8 @@ class Counter extends Component {
 }
 
 export default connect((state) => {
-    return {count: state}
+    const { count } = state
+    return { count }
 }, {
     increment
 })(Counter)
