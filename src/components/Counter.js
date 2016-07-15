@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react'
 
 class Counter extends Component {
     static propTypes = {
-        count: PropTypes.number
+        count: PropTypes.number,
+        increment: PropTypes.func
     };
 
     render() {
@@ -16,7 +17,7 @@ class Counter extends Component {
 
     handleIncrement = (ev) => {
         ev.preventDefault()
-        console.log('---', 'incrementing')
+        this.props.increment()
     }
 }
 
