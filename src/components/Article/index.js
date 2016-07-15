@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import CommentList from './../CommentList'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
+import { deleteArticle } from '../../AC/articles'
+import { connect } from 'react-redux'
 
 class Article extends Component {
 
@@ -24,13 +26,19 @@ class Article extends Component {
 
             return (
                 <div className="article">
-                    <h1 onClick = {openArticle}>{ title }</h1>
+                    <h1 onClick = {openArticle}>{ title } <a href="#" onClick = {this.handleDelete}>delete me</a></h1>
                     <CSSTransitionGroup transitionName="article" transitionEnterTimeout={500} transitionLeaveTimeout = {300}>
                         {body}
                     </CSSTransitionGroup>
                 </div>
             )
     }
+
+    handleDelete = (ev) => {
+        ev.preventDefault()
+        const { article, deleteArticle } = this.props
+        deleteArticle(article.id)
+    }
 }
 
-export default Article
+export default connect(null, { deleteArticle })(Article)
