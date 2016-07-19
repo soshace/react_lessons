@@ -18,7 +18,10 @@ export default (articles = defaultArticles, action) => {
 
     switch (type) {
         case DELETE_ARTICLE:
-            return articles.filter(article => article.id != payload.id)
+            return articles.delete(payload.id)
     }
+    //articles.set()
+    //articles.update()
+    //articles.updateIn([id, 'comments'], comments => ...)
     return articles
 }
