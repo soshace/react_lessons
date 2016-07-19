@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import { connect } from 'react-redux'
 
 class CommentList extends Component {
 
@@ -24,11 +25,11 @@ class CommentList extends Component {
     }
 
     render() {
-        const { comments, isOpen, toggleOpen } = this.props
+        const { commentObjects, isOpen, toggleOpen } = this.props
 
-        if (!comments || !comments.length) return <h3>no comments yet</h3>
+        if (!commentObjects || !commentObjects.length) return <h3>no comments yet</h3>
 
-        const commentItems = comments.map(comment => <li key = {comment.id}><Comment comment = {comment}/></li>)
+        const commentItems = commentObjects.map(comment => <li key = {comment.id}><Comment comment = {comment}/></li>)
         const body = isOpen ? <ul>{commentItems}</ul> : null
         const linkText = isOpen ? 'close comments' : 'show comments'
         return (
@@ -40,4 +41,8 @@ class CommentList extends Component {
     }
 }
 
-export default toggleOpen(CommentList)
+export default connect((state, { comments }) => {
+    return {
+        commentObjects: comments.map(id => state.comments.get(id))
+    }
+})(toggleOpen(CommentList))
