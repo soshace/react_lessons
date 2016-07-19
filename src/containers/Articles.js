@@ -13,6 +13,14 @@ class Articles extends Component {
     }
 }
 
-export default connect(
-    ({articles}) => ({articles})
-)(Articles)
+export default connect(({ articles, filters }) => {
+    return {
+        articles: filterArticles(articles, filters)
+    }
+})(Articles)
+
+function filterArticles(articles, { from, to, selectedArticles }) {
+    return articles
+        .filter((article) => selectedArticles.length ? selectedArticles.includes(article.id) : true)
+        .filter(article => (!from || Date.parse(article.date) > from) && (!to || Date.parse(article.date) < to))
+}

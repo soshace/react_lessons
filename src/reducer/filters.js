@@ -1,7 +1,7 @@
 import { CHANGE_FILTERS } from '../constants'
 
 const defaultFilters = {
-    selectedArticles: null,
+    selectedArticles: [],
     from: null,
     to: null
 }
