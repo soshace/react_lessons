@@ -64,9 +64,8 @@ class ArticleList extends Component {
     }
 
     handleSelectChange = (selectedArticles) => {
-        console.log(selectedArticles)
         this.setState({
-            selectedArticles
+            selectedArticles: selectedArticles.map(o => o.value)
         })
     }
 }
