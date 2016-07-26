@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import CommentList from './../CommentList'
+import CommentList from './../../containers/CommentList'
 import CSSTransitionGroup from 'react-addons-css-transition-group'
 import './style.css'
 import { deleteArticle } from '../../AC/articles'
@@ -21,17 +21,18 @@ class Article extends Component {
 */
 
     render() {
-        const { isOpen, openArticle, article: { title, text, comments } } = this.props
-            const body = isOpen ? <section>{ text } <CommentList comments = {comments} /></section> : null
+        const { isOpen, openArticle, article } = this.props
+        const { title, text } = article
+        const body = isOpen ? <section>{ text } <CommentList article = {article} /></section> : null
 
-            return (
-                <div className="article">
-                    <h1 onClick = {openArticle}>{ title } <a href="#" onClick = {this.handleDelete}>delete me</a></h1>
-                    <CSSTransitionGroup transitionName="article" transitionEnterTimeout={500} transitionLeaveTimeout = {300}>
-                        {body}
-                    </CSSTransitionGroup>
-                </div>
-            )
+        return (
+            <div className="article">
+                <h1 onClick = {openArticle}>{ title } <a href="#" onClick = {this.handleDelete}>delete me</a></h1>
+                <CSSTransitionGroup transitionName="article" transitionEnterTimeout={500} transitionLeaveTimeout = {300}>
+                    {body}
+                </CSSTransitionGroup>
+            </div>
+        )
     }
 
     handleDelete = (ev) => {
