@@ -22,7 +22,7 @@ export default (state = defaultState, action) => {
 
     switch (type) {
         case ADD_COMMENT:
-            return state.set(['entities', randomId], new Comment({
+            return state.setIn(['entities', randomId], new Comment({
                 id: randomId,
                 ...payload
             }))
