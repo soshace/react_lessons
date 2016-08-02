@@ -19,7 +19,6 @@ class ArticleList extends Component {
         return (
             <div>
                 <h1>Article list</h1>
-                <Filters />
                 <ul>
                     {listItems}
                 </ul>

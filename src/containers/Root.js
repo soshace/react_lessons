@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { Provider } from 'react-redux'
-import Counter from './Counter'
-import Articles from './Articles'
 import store from '../store'
 
 class RootContainer extends Component {
@@ -13,8 +11,7 @@ class RootContainer extends Component {
         return (
             <Provider store = {store}>
                 <div>
-                    <Counter />
-                    <Articles />
+                    {this.props.children}
                 </div>
             </Provider>
         )
