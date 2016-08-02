@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 class CommentList extends Component {
 
     componentWillReceiveProps({ isOpen, article, loadComments }) {
+        //nexProps.isOpen && !this.props.isOpen
         if (isOpen && !article.commentsLoaded && !article.commentsLoading) loadComments(article.id)
     }
 

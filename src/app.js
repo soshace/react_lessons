@@ -1,5 +1,5 @@
-import React from 'react'
+//import React from 'react'
 import { render } from 'react-dom'
-import Root from './containers/Root'
+import routes from './routes'
 
-render(<Root />, document.getElementById('container'))
+render(routes, document.getElementById('container'))
