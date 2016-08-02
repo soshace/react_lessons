@@ -9,19 +9,24 @@ class Articles extends Component {
     };
 
     componentDidMount() {
-        this.props.loadAllArticles()
+        const { loadAllArticles, loading, loaded } = this.props
+        if (!loaded && !loading) loadAllArticles()
     }
 
     render() {
         const { articles, loading } = this.props
         if (loading) return <h1>Loading...</h1>
-        return <ArticleList articles = {articles} />
+        return <div>
+            <ArticleList articles = {articles} />
+            {this.props.children}
+        </div>
     }
 }
 
 export default connect(({ articles, filters }) => {
     return {
         loading: articles.get('loading'),
+        loaded: articles.get('loaded'),
         articles: filterArticles(articles.get('entities'), filters)
     }
 }, {

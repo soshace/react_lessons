@@ -39,6 +39,7 @@ export default (state = defaultState, action) => {
         case LOAD_ALL_ARTICLES + SUCCESS:
             return state
                 .set('loading', false)
+                .set('loaded', true)
                 .set('entities', recordsFromArray(Article, response))
             //return state.update('entities', entities => entities.merge(recordsFromArray(Article, response)))
 
