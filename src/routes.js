@@ -7,7 +7,7 @@ import CounterPage from './containers/Counter'
 import FiltersPage from './containers/Filters'
 
 export default (
-    <Router history = {hashHistory}>
+    <Router history = {browserHistory}>
         <Route path="/" component = {Root}>
             <Route path = "articles" component = {ArticlePage}>
                 <Route path = ":id" component = {ArticleContainer} />
