@@ -1,20 +1,27 @@
 import React, { Component, PropTypes } from 'react'
 import Article from '../components/Article'
 import { connect } from 'react-redux'
-import { browserHistory } from 'react-router'
+//import { browserHistory } from 'react-router'
 
 class ArticleContainer extends Component {
     static propTypes = {
 
     };
 
+    static contextTypes = {
+        router: PropTypes.object,
+        store: PropTypes.object
+    }
+
     componentWillReceiveProps({ article, loaded, id }) {
-        if (loaded && !article) browserHistory.replace(`/articles/no_article?articleId=${id}`)
+        const { router } = this.context
+        if (loaded && !article) router.replace(`/articles/no_article?articleId=${id}`)
     }
 
     componentDidMount() {
+        const { router } = this.context
         const { article, loaded, id } = this.props
-        if (loaded && !article) browserHistory.replace(`/articles/no_article?articleId=${id}`)
+        if (loaded && !article) router.replace(`/articles/no_article?articleId=${id}`)
     }
 
     render() {

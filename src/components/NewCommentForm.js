@@ -6,8 +6,11 @@ class NewCommentForm extends Component {
         articleId: PropTypes.string.isRequired
     };
 
+    static contextTypes = {
+        user: PropTypes.string
+    }
+
     state = {
-        user: '',
         text: ''
     }
 
@@ -15,8 +18,6 @@ class NewCommentForm extends Component {
         const { text, user } = this.state
         return (
             <form onSubmit = {this.handleSubmit}>
-                Name:
-                <input value={user} onChange={this.handleChange('user')}/>
                 Comment:
                 <input value={text} onChange={this.handleChange('text')}/>
                 <input type="submit" value="add comment"/>
@@ -33,7 +34,10 @@ class NewCommentForm extends Component {
     handleSubmit = ev => {
         const { addComment, articleId } = this.props
         ev.preventDefault()
-        addComment(this.state, articleId)
+        addComment({
+            user: this.context.user,
+            text: this.state.text
+        }, articleId)
 
         this.setState({
             user: '',

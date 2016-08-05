@@ -8,6 +8,20 @@ class RootContainer extends Component {
 
     };
 
+    state = {
+        user: ''
+    }
+
+    static childContextTypes = {
+        user: PropTypes.string
+    }
+
+    getChildContext() {
+        return {
+            user: this.state.user
+        }
+    }
+
     render() {
         return (
             <Provider store = {store}>
@@ -19,10 +33,17 @@ class RootContainer extends Component {
                         <li><Link to="/filters">filters</Link></li>
                         <li><Link to="/comments">comments</Link></li>
                     </ul>
+                    <input value = {this.state.user} onChange = {this.handleChange}/>
                     {this.props.children}
                 </div>
             </Provider>
         )
+    }
+
+    handleChange = (ev) => {
+        this.setState({
+            user: ev.target.value
+        })
     }
 }
 
