@@ -1,5 +1,6 @@
 import React from 'react'
 import { Router, hashHistory, browserHistory, Route, Redirect, IndexRedirect, IndexRoute } from 'react-router'
+import store from './store'
 import Root from './containers/Root'
 import ArticlePage from './containers/Articles'
 import ArticleContainer from './RouteHandlers/Article'
@@ -18,7 +19,10 @@ export default (
         <Route path="/" component = {Root}>
             <Route path = "articles" component = {ArticlePage}>
                 <IndexRoute component = {ArticleIndex} />
-                <Route path = "new" component = {NewArticlePage} />
+                <Route path = "new" component = {NewArticlePage}
+                    onEnter = {(state, replace) => {if (!store.getState().user) replace('/articles')}}
+                       onLeave = {(prevState) => {console.log('leaving')}}
+                />
                 <Route path = "no_article" component = {NoArticleFound} />
                 <Route path = ":id" component = {ArticleContainer} />
                 <Route path = "/some/other/:id" component = {ArticleContainer} />
