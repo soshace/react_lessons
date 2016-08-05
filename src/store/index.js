@@ -8,7 +8,7 @@ import thunk from 'redux-thunk'
 const dumbMiddleware = store => next => action => next({...action, addition: 'hello world'})
 
 const enhancer = compose(
-    applyMiddleware(thunk, dumbMiddleware, randomId, api, logger),
+    applyMiddleware(thunk, dumbMiddleware, randomId, api),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )
 

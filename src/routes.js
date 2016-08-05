@@ -10,6 +10,7 @@ import CommentsPage from './RouteHandlers/CommentsPage'
 import ArticleIndex from './RouteHandlers/ArticleIndex'
 import NewArticlePage from './RouteHandlers/NewArticlePage'
 import NotFound from './RouteHandlers/NotFound'
+import NoArticleFound from './RouteHandlers/NoArticleFound'
 
 export default (
     <Router history = {browserHistory}>
@@ -18,6 +19,7 @@ export default (
             <Route path = "articles" component = {ArticlePage}>
                 <IndexRoute component = {ArticleIndex} />
                 <Route path = "new" component = {NewArticlePage} />
+                <Route path = "no_article" component = {NoArticleFound} />
                 <Route path = ":id" component = {ArticleContainer} />
                 <Route path = "/some/other/:id" component = {ArticleContainer} />
             </Route>
