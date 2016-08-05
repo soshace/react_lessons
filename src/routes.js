@@ -8,6 +8,8 @@ import FiltersPage from './containers/Filters'
 import CommentsRoot from './RouteHandlers/CommentsRoot'
 import CommentsPage from './RouteHandlers/CommentsPage'
 import ArticleIndex from './RouteHandlers/ArticleIndex'
+import NewArticlePage from './RouteHandlers/NewArticlePage'
+import NotFound from './RouteHandlers/NotFound'
 
 export default (
     <Router history = {browserHistory}>
@@ -15,6 +17,7 @@ export default (
         <Route path="/" component = {Root}>
             <Route path = "articles" component = {ArticlePage}>
                 <IndexRoute component = {ArticleIndex} />
+                <Route path = "new" component = {NewArticlePage} />
                 <Route path = ":id" component = {ArticleContainer} />
                 <Route path = "/some/other/:id" component = {ArticleContainer} />
             </Route>
@@ -25,5 +28,6 @@ export default (
                 <Route path = ":page" component = {CommentsPage} />
             </Route>
         </Route>
+        <Route path = "*" component = {NotFound} />
     </Router>
 )
