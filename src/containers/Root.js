@@ -16,6 +16,7 @@ class RootContainer extends Component {
                         <li><Link to="/articles">article list</Link></li>
                         <li><Link to="/counter">counter</Link></li>
                         <li><Link to="/filters">filters</Link></li>
+                        <li><Link to="/comments/1">comments</Link></li>
                     </ul>
                     {this.props.children}
                 </div>
