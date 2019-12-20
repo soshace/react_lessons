@@ -1,16 +1,15 @@
-import React, { Component }  from 'react'
-import Article from './Article'
+import React, { Component } from 'react';
+import Article from './Article';
 import oneOpen from './mixins/oneOpen'
 
 const ArticleList = React.createClass({
     mixins: [oneOpen],
     render() {
         const { articles } = this.props
-
         const listItems = articles.map((article) => <li key={article.id}>
-            <Article article = {article}
-                isOpen = {this.isItemOpen(article.id)}
-                openArticle = {this.toggleOpenItem(article.id)}
+            <Article article={article}
+                isOpen={this.isItemOpen(article.id)}
+                openArticle={this.toggleOpenItem(article.id)}
             />
         </li>)
         return (
@@ -22,6 +21,6 @@ const ArticleList = React.createClass({
             </div>
         )
     }
-})
+});
 
-export default ArticleList
+export default ArticleList;

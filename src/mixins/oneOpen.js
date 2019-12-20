@@ -1,6 +1,5 @@
 export default {
     getInitialState() {
-        //this.props
         return {
             openItemId: false
         }
@@ -8,20 +7,20 @@ export default {
     openItem(openItemId) {
         return ev => {
             if (ev) ev.preventDefault()
-            this.setState({openItemId})
+            this.setState({ openItemId });
         }
     },
 
     toggleOpenItem(id) {
         return ev => {
-            if (ev) ev.preventDefault()
+            if (ev) ev.preventDefault();
             this.setState({
-                openItemId: id == this.state.openItemId ? null : id
-            })
+                openItemId: id === this.state.openItemId ? null : id
+            });
         }
     },
 
     isItemOpen(id) {
-        return this.state.openItemId == id
+        return this.state.openItemId === id;
     }
 }
