@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 
 class JqueryComponent extends Component {
     static propTypes = {
@@ -6,12 +6,12 @@ class JqueryComponent extends Component {
     };
 
     componentDidMount() {
-        console.log('---',this.refs.component)
+        console.log('---', this.refs.component)
     }
 
     render() {
         return (
-            <div ref="component"/>
+            <div ref="component" />
         )
     }
 }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Article from './Article';
 import oneOpen from './mixins/oneOpen'
 
