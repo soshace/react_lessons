@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CommentList from './CommentList';
+import PropTypes from 'prop-types';
 
 class Article extends Component {
 
@@ -8,6 +9,10 @@ class Article extends Component {
         this.state = {
             isOpen: false
         }
+    }
+
+    static propTypes = {
+        article: PropTypes.object.isRequired
     }
 
     render() {
