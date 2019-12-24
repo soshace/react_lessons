@@ -3,6 +3,22 @@ import Comment from './Comment';
 import toggleOpen from './decorators/toggleOpen';
 
 class CommentList extends Component {
+    constructor(props) {
+        super(props);
+        console.log('---', this.props)
+    }
+    componentDidMount() {
+        console.log('---', 'mounted');
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('---', props.isOpen);
+        return null;
+    }
+
+    componentWillUnmount() {
+        console.log('---', 'unmounting');
+    }
     render() {
         const { comments, isOpen, toggleOpen } = this.props
         if (!comments || !comments.length) return <h3>no comments yet</h3>
