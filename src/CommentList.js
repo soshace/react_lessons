@@ -6,9 +6,10 @@ class CommentList extends Component {
     constructor(props) {
         super(props);
         console.log('---', this.props)
+        this.togglerRef = React.createRef();
     }
     componentDidMount() {
-        console.log('---', 'mounted');
+        console.log('---', 'mounted', this.togglerRef.current);
     }
 
     static getDerivedStateFromProps(props, state) {
@@ -28,7 +29,7 @@ class CommentList extends Component {
         const linkText = isOpen ? 'close comments' : 'show comments'
         return (
             <div>
-                <a href="#" onClick={toggleOpen}>{linkText}</a>
+                <a href="#" ref={this.togglerRef} onClick={toggleOpen}>{linkText}</a>
                 {body}
             </div>
         )
