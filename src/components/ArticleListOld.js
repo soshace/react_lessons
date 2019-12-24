@@ -1,6 +1,6 @@
 import React from 'react';
 import Article from './Article';
-import oneOpen from './mixins/oneOpen';
+import oneOpen from '../mixins/oneOpen';
 import createReactClass from "create-react-class";
 
 const ArticleList = createReactClass({
