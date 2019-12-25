@@ -1,6 +1,11 @@
-import { articles } from './fixtures'
-import ArticleList from './ArticleList'
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import ArticleList from './ArticleList';
+import { articles } from './fixtures';
 
-render(<ArticleList articles = {articles} />, document.getElementById('container'))
+function App() {
+  return (
+    <ArticleList articles={articles} />
+  );
+}
+
+export default App;

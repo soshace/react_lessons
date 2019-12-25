@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
 function Comment(props) {
     const { comment: { text, user } } = props
