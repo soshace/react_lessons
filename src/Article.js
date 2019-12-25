@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import CommentList from './CommentList';
 
 class Article extends Component {
