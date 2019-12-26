@@ -12,10 +12,6 @@ class CommentList extends Component {
     console.log("---", "mounted", this.refs.toggler);
   }
 
-  //   componentWillReceiveProps(nextProps) {
-  //     console.log("---", this.props.isOpen, nextProps.isOpen);
-  //   }
-
   componentWillUnmount() {
     console.log("---", "unmounting");
   }

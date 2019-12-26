@@ -1,24 +1,38 @@
 {
-  "name": "react_course_01_07",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "react_lessons",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "create-react-class": "^15.6.3",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0",
+    "react-select": "^3.0.8"
+  },
   "scripts": {
     "start": "npm run dev",
     "build": "webpack",
     "api": "node simple_api/server.js",
     "dev": "webpack-dev-server --hot --inline"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/romabelka/js_ru_01_07.git"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/romabelka/js_ru_01_07.git"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
-  "homepage": "https://github.com/romabelka/js_ru_01_07.git",
   "devDependencies": {
     "babel-core": "^6.5.2",
     "babel-loader": "^6.2.3",
