@@ -1,24 +1,25 @@
-import React, { Component } from 'react'
-import Comment from './Comment'
-import toggleOpen from './decorators/toggleOpen'
+import React, { Component } from 'react';
+import Comment from './Comment';
+import toggleOpen from './decorators/toggleOpen';
 
 class CommentList extends Component {
-
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         console.log('---', this.props)
+        this.togglerRef = React.createRef();
     }
     componentDidMount() {
-        console.log('---', 'mounted', this.refs.toggler)
+        console.log('---', 'mounted', this.togglerRef.current);
     }
 
-    componentWillReceiveProps(nextProps) {
-        console.log('---', this.props.isOpen, nextProps.isOpen)
+    static getDerivedStateFromProps(props, state) {
+        console.log('---', props.isOpen);
+        return null;
     }
 
     componentWillUnmount() {
-        console.log('---', 'unmounting')
+        console.log('---', 'unmounting');
     }
-
     render() {
         const { comments, isOpen, toggleOpen } = this.props
         if (!comments || !comments.length) return <h3>no comments yet</h3>
@@ -28,11 +29,11 @@ class CommentList extends Component {
         const linkText = isOpen ? 'close comments' : 'show comments'
         return (
             <div>
-                <a href="#" onClick={toggleOpen} ref="toggler">{linkText}</a>
+                <a href="#" ref={this.togglerRef} onClick={toggleOpen}>{linkText}</a>
                 {body}
             </div>
         )
     }
 }
 
-export default toggleOpen(CommentList)
+export default toggleOpen(CommentList);

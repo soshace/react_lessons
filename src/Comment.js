@@ -1,7 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types';
 
 function Comment(props) {
-    if (!props.comment) return <h3>Something</h3>
     const { comment: { text, user } } = props
     return (
         <div>
