@@ -1,5 +1,5 @@
-import React, { Component }  from 'react'
-import Article from './Article'
+import React, { Component } from 'react';
+import Article from './Article';
 
 class ArticleList extends Component {
     state = {
@@ -17,9 +17,9 @@ class ArticleList extends Component {
         const { articles } = this.props
 
         const listItems = articles.map((article) => <li key={article.id}>
-            <Article article = {article}
-                isOpen = {article.id == this.state.openArticleId}
-                openArticle = {this.openArticle(article.id)}
+            <Article article={article}
+                isOpen={article.id == this.state.openArticleId}
+                openArticle={this.openArticle(article.id)}
             />
         </li>)
         return (
@@ -33,4 +33,4 @@ class ArticleList extends Component {
     }
 }
 
-export default ArticleList
+export default ArticleList;

@@ -1,19 +1,18 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react';
 
 class JqueryComponent extends Component {
-    static propTypes = {
-
-    };
-
-    componentDidMount() {
-        console.log('---',this.refs.component)
-    }
-
-    render() {
-        return (
-            <div ref="component"/>
-        )
-    }
+  constructor(props) {
+    super(props);
+    this.component = React.createRef();
+  }
+  componentDidMount() {
+    console.log('---', this.component)
+  }
+  render() {
+    return (
+      <div ref={this.component} />
+    )
+  }
 }
 
-export default JqueryComponent
+export default JqueryComponent;
