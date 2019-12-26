@@ -23,14 +23,13 @@ class CommentList extends Component {
     render() {
         const { comments, isOpen, toggleOpen } = this.props
         if (!comments || !comments.length) return <h3>no comments yet</h3>
-
         const commentItems = comments.map(comment => <li key={comment.id}><Comment comment={comment} /></li>)
         const body = isOpen ? <ul>{commentItems}</ul> : null
         const linkText = isOpen ? 'close comments' : 'show comments'
         return (
             <div>
-                <a href="#" ref={this.togglerRef} onClick={toggleOpen}>{linkText}</a>
-                {body}
+              <a href="#" ref={this.togglerRef} onClick={toggleOpen}>{linkText}</a>
+              {body}
             </div>
         )
     }

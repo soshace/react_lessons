@@ -26,36 +26,4 @@ class Article extends Component {
     }
 }
 
-
-/* 
-function Article(props) { 
-    const article = props.article 
-//    const { article: { title, text } } = props 
- 
-    return ( 
-        <div> 
-            <h1>{ article.title }</h1> 
-            <section>{ article.text }</section> 
-        </div> 
-    ) 
-} 
-
-const Article = props => {
-    const [isOpen, setOpen] = React.useState(false)
-    const toggleOpen = (ev) => {
-        setOpen(!isOpen)
-    }
-    const { article } = props;
-    const body = isOpen ? <section>{article.text}</section> : null
-
-    return (
-        <div>
-            <h1 onClick={toggleOpen}>{article.title}</h1>
-            {body}
-        </div>
-    )
-
-}
-*/
-
 export default Article;
