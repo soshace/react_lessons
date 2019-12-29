@@ -16,6 +16,10 @@ class CommentList extends Component {
     console.log("---", "unmounting");
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.isOpen !== this.props.isOpen;
+  }
+
   render() {
     const { comments, isOpen, toggleOpen } = this.props;
     if (!comments || !comments.length) return <h3>no comments yet</h3>;

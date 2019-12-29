@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import CommentList from "./CommentList";
+import CommentList from "../CommentList";
+import "./style.css";
+import { CSSTransition } from "react-transition-group";
 
 class Article extends Component {
   static propTypes = {
@@ -13,16 +15,20 @@ class Article extends Component {
       openArticle,
       article: { title, text, comments }
     } = this.props;
-    const body = isOpen ? (
-      <section>
-        {text} <CommentList comments={comments} />
-      </section>
-    ) : null;
 
     return (
-      <div>
+      <div className="article">
         <h1 onClick={openArticle}>{title}</h1>
-        {body}
+        <CSSTransition
+          in={isOpen}
+          timeout={500}
+          classNames="article"
+          unmountOnExit
+        >
+          <section>
+            {text} <CommentList comments={comments} />
+          </section>
+        </CSSTransition>
       </div>
     );
   }
