@@ -1,7 +1,6 @@
-import { createStore } from 'redux'
-import reducer from '../reducer'
+import { createStore } from "redux";
+import reducer from "../reducers";
 
-const store = createStore(reducer, 0)
-window.store = store
+const store = createStore(reducer);
 
-export default store
+export default store;
