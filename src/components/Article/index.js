@@ -3,10 +3,18 @@ import PropTypes from "prop-types";
 import CommentList from "../CommentList";
 import "./style.css";
 import { CSSTransition } from "react-transition-group";
+import { connect } from "react-redux";
+import { deleteArticle } from "../../actions";
 
 class Article extends Component {
   static propTypes = {
     article: PropTypes.object.isRequired
+  };
+
+  handleDelete = event => {
+    event.preventDefault();
+    const { article, deleteArticle } = this.props;
+    deleteArticle(article.id);
   };
 
   render() {
@@ -15,10 +23,12 @@ class Article extends Component {
       openArticle,
       article: { title, text, comments }
     } = this.props;
-
     return (
       <div className="article">
         <h1 onClick={openArticle}>{title}</h1>
+        <a href="#" onClick={this.handleDelete}>
+          delete me
+        </a>
         <CSSTransition
           in={isOpen}
           timeout={500}
@@ -34,4 +44,7 @@ class Article extends Component {
   }
 }
 
-export default Article;
+export default connect(
+  null,
+  { deleteArticle }
+)(Article);
