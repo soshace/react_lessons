@@ -1,18 +1,19 @@
-import React, { Component, PropTypes } from 'react'
-import ArticleList from '../components/ArticleList'
-import { connect } from 'react-redux'
+import React from "react";
+import { connect } from "react-redux";
+import ArticleList from "../components/ArticleList";
 
-class Articles extends Component {
-    static propTypes = {
-
-    };
-
-    render() {
-        const { articles } = this.props
-        return <ArticleList articles = {articles} />
-    }
+function Articles(props) {
+  const { articles } = props;
+  return <ArticleList articles={articles} />;
 }
 
+const mapStateToProps = state => {
+  return {
+    articles: state.article.articles
+  };
+};
+
 export default connect(
-    ({articles}) => ({articles})
-)(Articles)
+  mapStateToProps,
+  {}
+)(Articles);
