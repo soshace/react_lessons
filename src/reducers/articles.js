@@ -1,6 +1,7 @@
 import { DELETE_ARTICLE } from "../types";
 import { normalizedArticles } from "../fixtures";
-import { OrderedMap, Record } from "immutable";
+import { Record } from "immutable";
+import { recordsFromArray } from "./utils";
 
 const Article = Record({
   id: "",
@@ -10,9 +11,7 @@ const Article = Record({
   comments: []
 });
 
-const defaultArticles = normalizedArticles.reduce((acc, el) => {
-  return acc.set(el.id, new Article(el));
-}, new OrderedMap({}));
+const defaultArticles = recordsFromArray(Article, normalizedArticles);
 
 const INITIAL_STATE = {
   articles: defaultArticles
@@ -21,10 +20,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case DELETE_ARTICLE:
-      const filteredArticles = state.articles.filter(
-        article => article.id !== action.payload
-      );
-      return { ...state, articles: filteredArticles };
+      return { ...state, articles: state.articles.delete(action.payload) };
 
     default:
       return state;

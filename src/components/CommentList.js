@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Comment from "./Comment";
 import toggleOpen from "../decorators/toggleOpen";
+import { connect } from "react-redux";
 
 class CommentList extends Component {
   constructor(props) {
@@ -21,10 +22,10 @@ class CommentList extends Component {
   }
 
   render() {
-    const { comments, isOpen, toggleOpen } = this.props;
-    if (!comments || !comments.length) return <h3>no comments yet</h3>;
+    const { commentObj, isOpen, toggleOpen } = this.props;
+    if (!commentObj || !commentObj.length) return <h3>no comments yet</h3>;
 
-    const commentItems = comments.map(comment => (
+    const commentItems = commentObj.map(comment => (
       <li key={comment.id}>
         <Comment comment={comment} />
       </li>
@@ -42,4 +43,14 @@ class CommentList extends Component {
   }
 }
 
-export default toggleOpen(CommentList);
+const mapStateToProps = (state, props) => {
+  console.log({ props, state });
+  return {
+    commentObj: props.comments.map(id => state.comments.comments.get(id))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(toggleOpen(CommentList));
