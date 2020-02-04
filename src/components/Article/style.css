@@ -1,21 +1,43 @@
+/* article style */
 .article {
-    background-color: #ddd;
+  background-color: #d3f4ff;
+  border-radius: 5px;
+  padding-left: 10px;
+  color: #222;
 }
 
+/* link style */
+a:link,
+a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 25px;
+  margin: 14px 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover,
+a:active {
+  background-color: red;
+}
+
+/* animation style */
 .article-enter {
-    opacity: 0.01;
+  opacity: 0;
+  transform: scale(0.8);
 }
-
-.article-enter.article-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
+.article-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
 }
-
-.article-leave {
-    opacity: 1;
+.article-exit {
+  opacity: 1;
 }
-
-.article-leave.article-leave-active {
-    opacity: 0.01;
-    transition: opacity 300ms ease-in;
+.article-exit-active {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 300ms, transform 300ms;
 }
