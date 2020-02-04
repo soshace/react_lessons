@@ -1,65 +1,86 @@
-import React, { Component, PropTypes } from 'react'
-import Select from 'react-select'
-import 'react-select/dist/react-select.css'
-import DayPicker, { DateUtils } from "react-day-picker"
-import 'react-day-picker/lib/style.css'
-import { connect } from 'react-redux'
-import { changeFilters } from '../AC/filters'
+import React, { Component } from "react";
+import Select from "react-select";
+import DayPicker, { DateUtils } from "react-day-picker";
+import "react-day-picker/lib/style.css";
+import { connect } from "react-redux";
+import { changeFilters } from "../actions";
 
 class Filters extends Component {
-    static propTypes = {
+  handleSelectChange = selectedArticles => {
+    const { changeFilters } = this.props;
+    changeFilters({
+      selectedArticles
+    });
+  };
 
-    };
+  getRangeTitle() {
+    const { from, to } = this.props.filters;
+    return (
+      <p>
+        {!from && !to && "Please select the first day."}
+        {from && !to && "Please select the last day."}
+        {from &&
+          to &&
+          `Selected from ${from.toLocaleDateString()} to
+                ${to.toLocaleDateString()}`}{" "}
+        {from && to && (
+          <button className="link" onClick={this.handleResetClick}>
+            Reset
+          </button>
+        )}
+      </p>
+    );
+  }
 
-    render() {
-        const { articles, filters } = this.props
-        const options = articles.map((article) => ({
-            label: article.title,
-            value: article.id
-        }))
-        return (
-            <div>
-                {this.getRangeTitle()}
-                <Select
-                    options = {options.toJS()}
-                    multi = {true}
-                    value = {filters.selectedArticles}
-                    onChange = {this.handleSelectChange}
-                />
-                <DayPicker
-                    ref="daypicker"
-                    selectedDays={day => DateUtils.isDayInRange(day, filters)}
-                    onDayClick={this.handleDayClick}
-                />
+  handleDayClick = day => {
+    const { filters, changeFilters } = this.props;
+    const range = DateUtils.addDayToRange(day, filters);
+    changeFilters(range);
+  };
 
-            </div>
-        )
-    }
-    getRangeTitle() {
-        const { from, to } = this.props.filters
-        const fromText = from && `Start date: ${from.toDateString()}`
-        const toText = to && `Finish date: ${to.toDateString()}`
+  handleResetClick = () => {
+    const { changeFilters } = this.props;
+    changeFilters({ from: undefined, to: undefined });
+  };
 
-        return <p>{fromText} {toText}</p>
-    }
-
-    handleDayClick = (e, day) => {
-        const { filters, changeFilters } = this.props
-        const range = DateUtils.addDayToRange(day, filters);
-        changeFilters(range)
-    }
-
-    handleSelectChange = (selectedArticles) => {
-        this.props.changeFilters({
-            selectedArticles: selectedArticles.map(o => o.value)
-        })
-    }
+  render() {
+    const { articles, filters } = this.props;
+    const { from, to, selectedArticles } = filters;
+    const modifiers = { start: from, end: to };
+    const options = articles.map(article => ({
+      label: article.title,
+      value: article.id
+    }));
+    return (
+      <div>
+        {this.getRangeTitle()}
+        <Select
+          options={options.toJS()}
+          isMulti={true}
+          value={selectedArticles}
+          onChange={this.handleSelectChange}
+        />
+        <DayPicker
+          className="Selectable"
+          selectedDays={{ from, to }}
+          modifiers={modifiers}
+          onDayClick={this.handleDayClick}
+        />
+      </div>
+    );
+  }
 }
 
-export default connect(state => {
-    const { articles, filters } = state
-    return {
-        articles: articles.valueSeq(),
-        filters
-    }
-}, { changeFilters })(Filters)
+const mapStateToProps = state => {
+  return {
+    articles: state.article.articles.valueSeq(),
+    filters: state.filters
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    changeFilters
+  }
+)(Filters);
