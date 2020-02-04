@@ -9,7 +9,7 @@ function Articles(props) {
 
 const mapStateToProps = state => {
   return {
-    articles: state.article.articles
+    articles: state.article.articles.valueSeq()
   };
 };
 

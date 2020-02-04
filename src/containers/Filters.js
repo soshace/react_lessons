@@ -55,7 +55,7 @@ class Filters extends Component {
       <div>
         {this.getRangeTitle()}
         <Select
-          options={options}
+          options={options.toJS()}
           isMulti={true}
           value={selectedArticles}
           onChange={this.handleSelectChange}
@@ -73,7 +73,7 @@ class Filters extends Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.article.articles,
+    articles: state.article.articles.valueSeq(),
     filters: state.filters
   };
 };
