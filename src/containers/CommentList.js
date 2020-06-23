@@ -1,42 +1,63 @@
-import React, { Component, PropTypes } from 'react'
-import Comment from './../components/Comment'
-import NewCommentForm from './../components/NewCommentForm'
-import toggleOpen from '../decorators/toggleOpen'
-import { addComment } from '../AC/comments'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import Comment from "../components/Comment";
+import toggleOpen from "../decorators/toggleOpen";
+import { connect } from "react-redux"; 
+import { addComment } from "../actions";
+import CommentForm from "../components/CommentForm";
 
 class CommentList extends Component {
-    render() {
-        const { commentObjects, isOpen, toggleOpen } = this.props
+  // constructor(props) {
+  //   super(props);
+  //   console.log("---", this.props);
+  // }
 
-        if (!commentObjects || !commentObjects.length) return <h3>no comments yet</h3>
+  // componentDidMount() {
+  //   console.log("---", "mounted", this.refs.toggler);
+  // }
 
-        const linkText = isOpen ? 'close comments' : 'show comments'
-        return (
-            <div>
-                <a href="#" onClick = {toggleOpen} ref="toggler">{linkText}</a>
-                {this.getBody()}
-            </div>
-        )
-    }
+  // componentWillUnmount() {
+  //   console.log("---", "unmounting");
+  // }
 
-    getBody() {
-        const { isOpen, article, commentObjects, addComment } = this.props
-        if (!isOpen) return null
-        const commentItems = commentObjects.map(comment => <li key = {comment.id}><Comment comment = {comment}/></li>)
-        return (
-            <div>
-                <ul>{commentItems}</ul>
-                <NewCommentForm articleId = {article.id} addComment = {addComment}/>
-            </div>
-        )
-    }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextProps.isOpen !== this.props.isOpen;
+  // }
+
+  render() {
+    const { commentObj, isOpen, toggleOpen, article } = this.props;
+    if (!commentObj || !commentObj.length) return <h3>no comments yet</h3>;
+
+    const commentItems = commentObj.map(comment => (
+      <li key={comment.id}>
+        <Comment comment={comment} />
+      </li>
+    ));
+    const body = isOpen ? (
+      <div>
+        <ul>{commentItems}</ul>
+        <CommentForm articleId={article.id} addComment={addComment} />
+      </div>
+    ) : null;
+    const linkText = isOpen ? "close comments" : "show comments";
+    return (
+      <div>
+        <button onClick={toggleOpen} ref="toggler">
+          {linkText}
+        </button>
+        {body}
+      </div>
+    );
+  }
 }
 
-export default connect((state, { article }) => {
-    return {
-        commentObjects: article.comments.map(id => state.comments.get(id))
-    }
-}, {
-    addComment
-})(toggleOpen(CommentList))
+const mapStateToProps = (state, props) => {
+  console.log({ props, state });
+  return {
+    commentObj: props.comments.map(id => state.comments.comments.get(id))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(toggleOpen(CommentList));

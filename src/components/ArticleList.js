@@ -1,31 +1,31 @@
-import React, { Component }  from 'react'
-import Article from './Article/index'
-import oneOpen from '../decorators/oneOpen'
-import Filters from '../containers/Filters'
+import React, { Component } from 'react';
+import Article from './Article';
+import oneOpen from '../decorators/oneOpen';
+import Filters from "../containers/Filters";
 
 class ArticleList extends Component {
+  renderListItem = () => {
+    const { articles, isItemOpen, toggleOpenItem } = this.props;
+    return articles.map(article => (
+      <li key={article.id}>
+        <Article
+          article={article}
+          isOpen={isItemOpen(article.id)}
+          openArticle={toggleOpenItem(article.id)}
+        />
+      </li>
+    ));
+  };
 
-
-    render() {
-        const { articles, isItemOpen, toggleOpenItem } = this.props
-
-        const listItems = articles.map((article) => <li key={article.id}>
-            <Article article = {article}
-                isOpen = {isItemOpen(article.id)}
-                openArticle = {toggleOpenItem(article.id)}
-            />
-        </li>)
-
-        return (
-            <div>
-                <h1>Article list</h1>
-                <Filters />
-                <ul>
-                    {listItems}
-                </ul>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div>
+        <h1>Article list</h1>
+        <Filters />
+        <ul>{this.renderListItem()}</ul>
+      </div>
+    );
+  }
 }
 
-export default oneOpen(ArticleList)
+export default oneOpen(ArticleList);
