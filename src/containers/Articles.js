@@ -9,7 +9,7 @@ function Articles(props) {
 
 const mapStateToProps = state => {
   return {
-    articles: state.article.articles.valueSeq()
+    articles: filterArticles(state.article.articles, state.filters)
   };
 };
 
@@ -17,3 +17,16 @@ export default connect(
   mapStateToProps,
   {}
 )(Articles);
+
+function filterArticles(articles, { from, to, selectedArticles }) {
+  return articles
+    .valueSeq()
+    .filter(article =>
+      selectedArticles.length ? selectedArticles.includes(article.id) : true
+    )
+    .filter(
+      article =>
+        (!from || Date.parse(article.date) > from) &&
+        (!to || Date.parse(article.date) < to)
+    );
+}

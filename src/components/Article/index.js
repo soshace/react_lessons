@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import CommentList from "../CommentList";
+import CommentList from "../../containers/CommentList";
 import "./style.css";
 import { CSSTransition } from "react-transition-group";
 import { connect } from "react-redux";
@@ -21,14 +21,15 @@ class Article extends Component {
     const {
       isOpen,
       openArticle,
-      article: { title, text, comments }
+      article
     } = this.props;
+    const { title, text, comments } = article;
     return (
       <div className="article">
         <h1 onClick={openArticle}>{title}</h1>
-        <a href="#" onClick={this.handleDelete}>
+        <button onClick={this.handleDelete}>
           delete me
-        </a>
+        </button>
         <CSSTransition
           in={isOpen}
           timeout={500}
@@ -36,7 +37,7 @@ class Article extends Component {
           unmountOnExit
         >
           <section>
-            {text} <CommentList comments={comments} />
+            {text} <CommentList article={article} comments={comments} />
           </section>
         </CSSTransition>
       </div>

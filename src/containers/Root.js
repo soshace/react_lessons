@@ -1,6 +1,6 @@
 import React from "react";
 import Articles from "./Articles";
-import Counter from "./Counter";
+// import Counter from "./Counter";
 import { Provider } from "react-redux";
 import store from "../store";
 

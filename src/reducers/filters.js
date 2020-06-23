@@ -1,7 +1,7 @@
 import { CHANGE_FILTERS } from "../types";
 
 const INITIAL_STATE = {
-  selectedArticles: null,
+  selectedArticles: [],
   from: null,
   to: null
 };

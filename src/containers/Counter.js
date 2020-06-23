@@ -23,12 +23,12 @@ class Counter extends Component {
     return (
       <div>
         <h1>{this.props.count}</h1>
-        <a href="#" onClick={this.handleIncrement}>
+        <button onClick={this.handleIncrement}>
           increment
-        </a>
-        <a href="#" onClick={this.handleDecrement}>
+        </button>
+        <button onClick={this.handleDecrement}>
           decrement
-        </a>
+        </button>
       </div>
     );
   }
