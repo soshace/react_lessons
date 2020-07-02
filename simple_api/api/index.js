@@ -13,7 +13,7 @@ router.get('/article', function (req, res, next) {
 
 router.get('/article/:id', function (req, res, next) {
     var article = mocks.articles.filter(function (article) {
-        return article.id == req.params.id
+        return article.id === req.params.id
     })[0];
     if (article) return res.json(article);
 
