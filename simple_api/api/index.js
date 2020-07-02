@@ -1,12 +1,9 @@
 var router = require('express').Router();
 var mocks = require('./mock');
-var assign = require('object-assign');
 
 router.get('/article', function (req, res, next) {
     var articles = mocks.articles.map(function (article) {
-            return assign({}, article, {
-                text: undefined
-            })
+            return { ...article, text: undefined };
         }),
         limit = Number(req.query.limit) || articles.length,
         offset = Number(req.query.offset) || 0;
@@ -39,11 +36,11 @@ router.get('/comment', function (req, res, next) {
     var aid = req.query.article;
     if (aid) {
         var article = mocks.articles.find(function(article) {
-            return article.id == aid
+            return article.id === aid
         })
         return res.json((article.comments || []).map(function(id) {
             return mocks.comments.find(function(comment) {
-                return comment.id == id
+                return comment.id === id
             })
         }))
     }

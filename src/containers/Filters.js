@@ -73,7 +73,7 @@ class Filters extends Component {
 
 const mapStateToProps = state => {
   return {
-    articles: state.article.articles.valueSeq(),
+    articles: state.article.entities.valueSeq(),
     filters: state.filters
   };
 };
