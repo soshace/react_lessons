@@ -40,7 +40,7 @@ export const fetchArticleRequest = () => {
     // In this case, we return a promise to wait for.
     // This is not required by thunk middleware, but it is convenient for us.
 
-    return fetch(`api/articles`)
+    return fetch(`http://localhost:3001/api/article`)
       .then(
         response => {
           console.log('response', response)
