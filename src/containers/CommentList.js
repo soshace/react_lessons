@@ -24,7 +24,7 @@ class CommentList extends Component {
   // }
 
   render() {
-    const { commentObj, isOpen, toggleOpen, article } = this.props;
+    const { commentObj, isOpen, toggleOpen, article, addComment } = this.props;
     if (!commentObj || !commentObj.length) return <h3>no comments yet</h3>;
 
     const commentItems = commentObj.map(comment => (
@@ -59,5 +59,5 @@ const mapStateToProps = (state, props) => {
 
 export default connect(
   mapStateToProps,
-  {}
+  { addComment }
 )(toggleOpen(CommentList));

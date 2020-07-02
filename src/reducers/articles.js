@@ -20,10 +20,11 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_COMMENT:
-      return state.articles.updateIn(
-        [action.payload.articleId, "comments"],
-        comments => comments.concat(action.randomId)
-      );
+      return {
+        ...state, articles: state.articles.updateIn(
+          [action.payload.articleId, "comments"],
+          comments => comments.concat(action.randomId)
+        )};
     case DELETE_ARTICLE:
       return { ...state, articles: state.articles.delete(action.payload) };
 

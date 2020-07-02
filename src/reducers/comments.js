@@ -18,13 +18,15 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_COMMENT:
-      return state.set(
-        action.randomId,
-        new Comment({
-          id: action.randomId,
-          ...action.payload
-        })
-      );
+      return {
+        ...state, comments: state.comments.set(
+          action.randomId,
+          new Comment({
+            id: action.randomId,
+            user: action.payload.user,
+            text: action.payload.text,
+          })
+        )}
     default:
       return state;
   }
