@@ -1,35 +1,41 @@
-import React, { Component, PropTypes } from 'react'
-import ArticleList from '../components/ArticleList'
-import { connect } from 'react-redux'
-import { loadAllArticles, loadAllArticlesAlt } from '../AC/articles'
+import React from "react";
+import { connect } from "react-redux";
+import { fetchArticleRequest } from '../actions';
+import ArticleList from "../components/ArticleList";
 
-class Articles extends Component {
-    static propTypes = {
+class Articles extends React.Component {
+  componentDidMount(){
+    this.props.fetchArticleRequest();
+  }
 
-    };
-
-    componentDidMount() {
-        this.props.loadAllArticles()
-    }
-
-    render() {
-        const { articles, loading } = this.props
-        if (loading) return <h1>Loading...</h1>
-        return <ArticleList articles = {articles} />
-    }
+  render(){
+    const { articles, isFetching } = this.props;
+    if(isFetching) return <p>Loading...</p>
+    return <ArticleList articles={articles} />;
+  }
 }
 
-export default connect(({ articles, filters }) => {
-    return {
-        loading: articles.get('loading'),
-        articles: filterArticles(articles.get('entities'), filters)
-    }
-}, {
-    loadAllArticles: loadAllArticlesAlt
-})(Articles)
+const mapStateToProps = state => {
+  return {
+    isFetching: state.article.isFetching,
+    articles: filterArticles(state.article.entities, state.filters)
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchArticleRequest }
+)(Articles);
 
 function filterArticles(articles, { from, to, selectedArticles }) {
-    return articles.valueSeq()
-        .filter((article) => selectedArticles.length ? selectedArticles.includes(article.id) : true)
-        .filter(article => (!from || Date.parse(article.date) > from) && (!to || Date.parse(article.date) < to))
+  return articles
+    .valueSeq()
+    .filter(article =>
+      selectedArticles.length ? selectedArticles.includes(article.id) : true
+    )
+    .filter(
+      article =>
+        (!from || Date.parse(article.date) > from) &&
+        (!to || Date.parse(article.date) < to)
+    );
 }

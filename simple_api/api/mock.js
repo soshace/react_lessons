@@ -1,4 +1,4 @@
-var comments = [
+const comments = [
     {
         "id": 0,
         "user": "Gilliam Underwood",
@@ -82,7 +82,7 @@ var comments = [
 
 ]
 
-var articles = [
+const articles = [
     {
         "id": "56c782f18990ecf954f6e027",
         "date": "2016-06-09T15:03:23.000Z",
