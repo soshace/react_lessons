@@ -2,9 +2,7 @@ var router = require('express').Router();
 var mocks = require('./mock');
 
 router.get('/article', function (req, res, next) {
-    var articles = mocks.articles.map(function (article) {
-            return { ...article, text: undefined };
-        }),
+    var articles = mocks.articles,
         limit = Number(req.query.limit) || articles.length,
         offset = Number(req.query.offset) || 0;
 
