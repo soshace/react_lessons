@@ -11,8 +11,9 @@ class CommentList extends Component {
   }
 
   render() {
-    const { comments, isOpen, toggleOpen, article, addComment } = this.props;
-    // if (!isFetching || !commentObj.length) return <h3>no comments yet</h3>;
+    const { comments, isOpen, toggleOpen, article, addComment, isFetching } = this.props;
+    if (isFetching) return <h3>loading...</h3>;
+    if (!comments.length) return <h3>no comments yet</h3>;
     const commentItems = comments.map(comment => {
       return (
         <li key={comment.id}>
