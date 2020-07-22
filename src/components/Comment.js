@@ -2,14 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Comment(props) {
-  if (!props.comment) return <h3>Something</h3>;
+  if (!props.comment) return <h3>No comment</h3>;
   const {
     comment: { text, user }
   } = props;
   return (
     <div>
       <p>{text}</p>
-      <b>by {user}</b>
+      <p>by {user}</p>
     </div>
   );
 }

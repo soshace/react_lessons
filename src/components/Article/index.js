@@ -23,7 +23,7 @@ class Article extends Component {
       openArticle,
       article
     } = this.props;
-    const { title, text, comments } = article;
+    const { title, text } = article;
     return (
       <div className="article">
         <h1 onClick={openArticle}>{title}</h1>
@@ -37,7 +37,7 @@ class Article extends Component {
           unmountOnExit
         >
           <section>
-            {text} <CommentList article={article} comments={comments} />
+            {text} <CommentList article={article} />
           </section>
         </CSSTransition>
       </div>

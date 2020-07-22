@@ -6,3 +6,6 @@ export const ADD_COMMENT = "add_comment";
 export const FETCH_ARTICLE_REQUEST = "fetch_article_request";
 export const FETCH_ARTICLE_SUCCESS = "fetch_article_success";
 export const FETCH_ARTICLE_FAILURE = "fetch_article_failure";
+export const FETCH_COMMENT_REQUEST = "fetch_comment_request";
+export const FETCH_COMMENT_SUCCESS = "fetch_comment_success";
+export const FETCH_COMMENT_FAILURE = "fetch_comment_failure";

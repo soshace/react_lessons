@@ -21,7 +21,6 @@ const requestSuccess = (data) => {
 };
 
 const requestFailed = (error) => {
-  console.log('error', error)
   return {
     type: FETCH_ARTICLE_FAILURE,
     error: error,

@@ -1,5 +1,4 @@
-import { ADD_COMMENT } from "../types";
-import { normalizedComments } from "../fixtures";
+import { ADD_COMMENT, FETCH_COMMENT_REQUEST, FETCH_COMMENT_FAILURE, FETCH_COMMENT_SUCCESS } from "../types";
 import { Record } from "immutable";
 import { recordsFromArray } from "./utils";
 
@@ -9,10 +8,12 @@ const Comment = Record({
   text: ""
 });
 
-const defaultComments = recordsFromArray(Comment, normalizedComments);
+const defaultComments = recordsFromArray(Comment, []);
 
 const INITIAL_STATE = {
-  comments: defaultComments
+  comments: defaultComments,
+  isFetching: false,
+  errors: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -27,6 +28,12 @@ export default (state = INITIAL_STATE, action) => {
             text: action.payload.text,
           })
         )}
+    case FETCH_COMMENT_REQUEST:
+      return { ...state, isFetching: true };
+    case FETCH_COMMENT_FAILURE:
+      return { ...state, isFetching: false, errors: state.errors.push(action.error) };
+    case FETCH_COMMENT_SUCCESS:
+      return { ...state, isFetching: false, comments: recordsFromArray(Comment, action.payload) };
     default:
       return state;
   }

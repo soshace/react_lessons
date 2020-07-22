@@ -2,36 +2,24 @@ import React, { Component } from "react";
 import Comment from "../components/Comment";
 import toggleOpen from "../decorators/toggleOpen";
 import { connect } from "react-redux"; 
-import { addComment } from "../actions";
+import { addComment, fetchCommentRequest } from "../actions";
 import CommentForm from "../components/CommentForm";
 
 class CommentList extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   console.log("---", this.props);
-  // }
-
-  // componentDidMount() {
-  //   console.log("---", "mounted", this.refs.toggler);
-  // }
-
-  // componentWillUnmount() {
-  //   console.log("---", "unmounting");
-  // }
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   return nextProps.isOpen !== this.props.isOpen;
-  // }
+  componentDidMount() {
+    this.props.fetchCommentRequest(this.props.article.id);
+  }
 
   render() {
-    const { commentObj, isOpen, toggleOpen, article, addComment } = this.props;
-    if (!commentObj || !commentObj.length) return <h3>no comments yet</h3>;
-
-    const commentItems = commentObj.map(comment => (
-      <li key={comment.id}>
-        <Comment comment={comment} />
-      </li>
-    ));
+    const { comments, isOpen, toggleOpen, article, addComment } = this.props;
+    // if (!isFetching || !commentObj.length) return <h3>no comments yet</h3>;
+    const commentItems = comments.map(comment => {
+      return (
+        <li key={comment.id}>
+          <Comment comment={comment} />
+        </li>
+      );
+    });
     const body = isOpen ? (
       <div>
         <ul>{commentItems}</ul>
@@ -51,13 +39,13 @@ class CommentList extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  console.log({ props, state });
   return {
-    commentObj: props.comments.map(id => state.comments.comments.get(id))
+    comments: state.comments.comments.valueSeq(),
+    isFetching: state.comments.isFetching,
   };
 };
 
 export default connect(
   mapStateToProps,
-  { addComment }
+  { addComment, fetchCommentRequest }
 )(toggleOpen(CommentList));
