@@ -1,45 +1,51 @@
-import React, { Component, PropTypes } from 'react'
-import CommentList from './../../containers/CommentList'
-import CSSTransitionGroup from 'react-addons-css-transition-group'
-import './style.css'
-import { deleteArticle } from '../../AC/articles'
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import CommentList from "../../containers/CommentList";
+import "./style.css";
+import { CSSTransition } from "react-transition-group";
+import { connect } from "react-redux";
+import { deleteArticle } from "../../actions";
 
 class Article extends Component {
+  static propTypes = {
+    article: PropTypes.object.isRequired
+  };
 
-    static propTypes = {
-        article: PropTypes.object.isRequired
-    }
+  handleDelete = event => {
+    event.preventDefault();
+    const { article, deleteArticle } = this.props;
+    deleteArticle(article.id);
+  };
 
-/*
-    constructor(props) {
-        super(props)
-        this.state = {
-            isOpen: false
-        }
-    }
-*/
-
-    render() {
-        const { isOpen, openArticle, article } = this.props
-        const { title, text } = article
-        const body = isOpen ? <section>{ text } <CommentList article = {article} /></section> : null
-
-        return (
-            <div className="article">
-                <h1 onClick = {openArticle}>{ title } <a href="#" onClick = {this.handleDelete}>delete me</a></h1>
-                <CSSTransitionGroup transitionName="article" transitionEnterTimeout={500} transitionLeaveTimeout = {300}>
-                    {body}
-                </CSSTransitionGroup>
-            </div>
-        )
-    }
-
-    handleDelete = (ev) => {
-        ev.preventDefault()
-        const { article, deleteArticle } = this.props
-        deleteArticle(article.id)
-    }
+  render() {
+    const {
+      isOpen,
+      openArticle,
+      article
+    } = this.props;
+    const { title, text } = article;
+    return (
+      <div className="article">
+        <h1 onClick={openArticle}>{title}</h1>
+        <button onClick={this.handleDelete}>
+          delete me
+        </button>
+        <CSSTransition
+          in={isOpen}
+          timeout={500}
+          classNames="article"
+          unmountOnExit
+        >
+          <section>
+            {text} <CommentList article={article} />
+          </section>
+        </CSSTransition>
+      </div>
+    );
+  }
 }
 
-export default connect(null, { deleteArticle })(Article)
+export default connect(
+  null,
+  { deleteArticle }
+)(Article);

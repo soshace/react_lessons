@@ -5,5 +5,5 @@ export default store => next => action => {
     next({
         ...rest,
         randomId: Date.now() + Math.random()
-    })
-}
+    });
+};

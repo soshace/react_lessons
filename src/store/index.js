@@ -1,18 +1,13 @@
-import { createStore, applyMiddleware, compose } from 'redux'
-import reducer from '../reducer'
-import logger from '../middlewares/logger'
-import randomId from '../middlewares/randomId'
-import api from '../middlewares/api'
-import thunk from 'redux-thunk'
-
-const dumbMiddleware = store => next => action => next({...action, addition: 'hello world'})
+import { createStore, applyMiddleware, compose } from "redux";
+import ReduxThunk from 'redux-thunk';
+import reducer from "../reducers";
+import randomId from "../middlewares/randomID";
 
 const enhancer = compose(
-    applyMiddleware(thunk, dumbMiddleware, randomId, api),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-)
+  applyMiddleware(randomId, ReduxThunk),
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+);
 
-const store = createStore(reducer, {}, enhancer)
-window.store = store
+const store = createStore(reducer, {}, enhancer);
 
-export default store
+export default store;
